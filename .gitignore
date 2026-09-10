@@ -1,0 +1,29 @@
+# Dependencies (installed via `composer install`)
+/vendor/
+
+# Node (if any front-end tooling is added later)
+/node_modules/
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# PHP CS Fixer
+.php-cs-fixer.cache
+
+# Editors / IDEs
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+/build/
+/dist/
+*.zip
+*.tar.gz

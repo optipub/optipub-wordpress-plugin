@@ -1,0 +1,673 @@
+/* TOP LEVEL - OPTIPUB WP PLUGIN */
+
+body.toplevel_page_optipub {
+    max-width: 100%;
+}
+
+body.toplevel_page_optipub .optipub-modal {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+body.toplevel_page_optipub .optipub-modal-content {
+    margin-right: auto;
+    display: inline-block; 
+    background-color: #fefefe;
+    padding: 20px;
+    margin-top:2rem;
+    border: 1px solid #888;
+}
+
+body.toplevel_page_optipub #optipubModal {
+    display: none;
+}
+
+body.toplevel_page_optipub #optipubModal .optipub-modal-content {
+    width: 864px;
+    max-width: 75%;
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
+}
+
+@media (min-width: 783px) {
+    body.toplevel_page_optipub .optipub-modal {
+        margin-left: 36px;
+    }
+}
+
+@media (min-width: 961px) {
+    body.toplevel_page_optipub .optipub-modal {
+        margin-left: 160px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    body.toplevel_page_optipub #optipubModal .optipub-modal-content {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 767.98px) {
+    body.toplevel_page_optipub #optipubModal .optipub-modal-content {
+        max-height: calc(100vh - 100px);
+    }
+}
+
+body.toplevel_page_optipub #themeChanged {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed; /* or absolute, depending on requirement */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body.toplevel_page_optipub #themeChanged .optipub-modal-content {
+    /*background: #dba617;*/
+    background: rgba(79,148,212,.8);
+    border: solid 1px #00709e;
+    border-radius: 10px;
+    margin: auto;
+    text-align: center;
+}
+
+body.toplevel_page_optipub #themeChanged .op-warning-message {
+    padding: 10px;
+    background: #fff;
+    border: solid 1px #00709e;
+    border-radius: 10px;
+}
+
+body.toplevel_page_optipub #themeChanged #theme-changed-ignore {
+    background: #ccc;
+    border-color: #ccc;
+    color: #fff;
+}
+
+/*
+body.toplevel_page_optipub .optipub-modal-content {
+    display: inline-block; 
+    background-color: #fefefe;
+    padding: 20px;
+    margin-top:2rem;
+    border: 1px solid #888;
+    
+}
+*/
+
+body.toplevel_page_optipub #save-widgets label {
+    color: #2271b1;
+}
+
+body.toplevel_page_optipub #widget-view-options {
+    font-size: 12px;
+    display: none; 
+    color: #2271b1;
+}
+
+body.toplevel_page_optipub .widget-view-display>pre {
+    overflow: auto;
+    white-space: pre-wrap;
+    padding: 16px;
+    color: #fff;
+    background-color: #424242;
+    border-radius: 10px;
+    border: double 6px #fff;
+}
+
+body.toplevel_page_optipub .optipub-close {
+    color: #aaa;
+    float: right !important;
+    font-size: 28px;
+    font-weight: bold;
+    position: relative;
+    z-index: 100;
+}
+
+body.toplevel_page_optipub .optipub-close-sp {
+    color: #00ff00;
+    height: 1.3rem;
+    font-size: 1rem;
+    text-align: center;
+}
+
+body.toplevel_page_optipub .optipub-close:hover,
+body.toplevel_page_optipub .optipub-close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+body.toplevel_page_optipub .wp-list-table.widgets td,
+body.toplevel_page_optipub .wp-list-table.widgets th.check-column {
+    vertical-align: middle;
+}
+
+body.toplevel_page_optipub .wp-list-table.widgets th.check-column {
+    padding-top: 0px;
+}
+
+body.toplevel_page_optipub .wp-list-table .column-description {
+    text-align: center;
+    width: 20px;
+    padding: 8px 0px !important;
+}
+
+body.toplevel_page_optipub .wp-list-table { 
+    width: auto; 
+}
+
+body.toplevel_page_optipub #import-export-widgets {
+    text-align: right;
+    /*margin: 1rem 0 0 0;*/
+}
+
+body.toplevel_page_optipub .optipub-actions-header {
+    white-space: nowrap;
+}
+
+body.toplevel_page_optipub .wp-list-table .column-actions .button-secondary {
+    margin-right: 4px;
+}
+
+@media screen and (min-width: 782px) {
+    body.toplevel_page_optipub .wp-list-table .column-actions {
+        width: 104px !important;
+    }
+
+    body.toplevel_page_optipub .wp-list-table .column-actions .button {
+        width: 50px;
+    }
+}
+
+body.toplevel_page_optipub .widgets-table-title {
+    display: flex;
+    align-items: center;
+}
+
+body.toplevel_page_optipub .widgets-table-title a {
+    color: #1d2327;
+}
+
+body.toplevel_page_optipub .widgets-table-title h3 {
+    font-size: 1.2rem;
+}
+
+body.toplevel_page_optipub .widgets-table-title .widget-edit {
+    height: 30px;
+    margin-left: 16px;
+}
+ 
+body.toplevel_page_optipub .admin-required {
+    padding-bottom: 16px;
+}
+
+body.toplevel_page_optipub .pre-response {
+    max-width: 100%;
+    margin-bottom: 2rem;
+}
+
+body.taxonomy-optipub_publication .accordion-container,
+body.toplevel_page_optipub .accordion-container,
+body.toplevel_page_optipub #widgets-table,
+body.toplevel_page_optipub .wp-list-table.widgets {
+    width: 100%;
+    max-width: 900px;
+}
+
+body.toplevel_page_optipub #widgets-accordion {
+    padding: 5px 18px;
+    /*max-width: 864px;*/
+    max-width: calc(100% - 36px);
+}
+
+body.taxonomy-optipub_publication .accordion-container,
+body.toplevel_page_optipub .accordion-container {
+    margin-bottom: 2rem;
+}
+
+body.toplevel_page_optipub #widgets-table {
+    margin-bottom: 3rem;
+}
+
+/* Style the buttons that are used to open and close the accordion panel */
+body.taxonomy-optipub_publication .accordion,
+body.toplevel_page_optipub .accordion {
+background-color: #ccc;
+font-size: 16px;
+font-weight: bold;
+color: #444;
+cursor: pointer;
+padding: 18px;
+width: 100%;
+text-align: left;
+border: none;
+outline: none;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+body.taxonomy-optipub_publication .active, body.taxonomy-optipub_publication .accordion:hover,
+body.toplevel_page_optipub .active, body.toplevel_page_optipub .accordion:hover {
+background-color: #ababab;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+body.taxonomy-optipub_publication .panel,
+body.toplevel_page_optipub .panel {
+padding: 3px 16px 16px 16px;
+background-color: white;
+display: none;
+overflow: hidden;
+outline: none;
+transition: auto;
+}
+
+body.toplevel_page_optipub #widgets-content.panel {
+    padding: 20px 16px;
+}
+
+body.toplevel_page_optipub #copy-content strong {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+body.toplevel_page_optipub #copy-content ul {
+    list-style: circle;
+    margin: 20px 0px 20px 20px;
+}
+
+body.toplevel_page_optipub #copy-content li {
+    margin: 0px 0px 13px 13px;
+} 
+
+body.toplevel_page_optipub #copy-button {
+    margin-top: 26px;
+}
+
+body.toplevel_page_optipub #copy-progress {
+    border: double 3px #ababab;
+    padding: 0px 16px 16px 16px;
+    margin: 0px 0px 26px 0px;
+    text-wrap: wrap;
+}
+
+body.toplevel_page_optipub .details-section-dropdown,
+body.toplevel_page_optipub .details-dropdown {
+    display: none;
+}
+
+body.toplevel_page_optipub .details-section-lists {
+    list-style-type: none;
+}
+
+body.toplevel_page_optipub .details-section-lists>li {
+    margin-bottom: 1rem; 
+    margin-left: -15px;
+}
+
+body.toplevel_page_optipub .dashicons-arrow-down:before {
+    color: #2271b1;
+}
+
+body.toplevel_page_optipub #details-page,
+body.toplevel_page_optipub #details-parts,
+body.toplevel_page_optipub #details-widget,
+body.toplevel_page_optipub #details-function,
+body.toplevel_page_optipub #details-create-widgets {
+    display: none;
+    background: #eeeeee;
+    margin: 24px;
+    padding: 16px 24px;
+}
+
+body.toplevel_page_optipub #details-page ul,
+body.toplevel_page_optipub #details-parts ul,
+body.toplevel_page_optipub #details-widget ul,
+body.toplevel_page_optipub #details-function ul,
+body.toplevel_page_optipub #details-page li,
+body.toplevel_page_optipub #details-parts li,
+body.toplevel_page_optipub #details-widget li,
+body.toplevel_page_optipub #details-function li {
+    font-size: 12px;
+    line-height: 24px;
+    margin-bottom: 6px;
+    margin-top: 6px;
+}
+
+body.toplevel_page_optipub .button-optipub {
+    height: 40px;
+    width: 120px;
+    margin-top: 26px !important;
+}
+
+body.toplevel_page_optipub .button-optipub.widget-edit {
+    margin: 0px !important;
+    width: 140px;
+}
+body.toplevel_page_optipub #submit-data,
+body.toplevel_page_optipub #clear-data {
+    margin-left: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+body.toplevel_page_optipub #copy-clear,
+body.toplevel_page_optipub #clear-data {
+    justify-self: end;
+}
+
+body.toplevel_page_optipub .save-changes-wrap {
+    width: 100%;
+    overflow: hidden;
+    margin: 0 0 26px 0;
+}
+
+body.toplevel_page_optipub #save-changes {
+    float: left;
+    width: auto;
+    max-width: 100%;
+}
+
+body.toplevel_page_optipub .clear-data-container {
+    display: block;
+    text-align: right;
+}
+
+body.toplevel_page_optipub .pre-response {
+    overflow: auto;
+    white-space: pre-wrap;
+    padding: 16px 16px 16px 16px;
+    color: #fff;
+    background-color: #424242;
+    border-radius: 10px;
+    border: double 6px #fff;
+}
+
+body.toplevel_page_optipub .op-button-warning {
+    background: #dba617;
+    margin-bottom: 10px;
+}
+
+body.toplevel_page_optipub .op-button-warning:hover {
+    cursor: pointer;
+    background: #bd911c;
+}
+
+body.toplevel_page_optipub .settings {
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: max-content max-content max-content;
+    grid-gap: 5px;
+}
+
+body.toplevel_page_optipub #save-widgets div.settings {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    column-gap: 5px;
+}
+
+body.toplevel_page_optipub #save-widgets div.settings input, 
+body.toplevel_page_optipub #save-widgets div.settings textarea,
+body.toplevel_page_optipub #save-widgets div.settings label,
+body.toplevel_page_optipub #save-widgets div.settings .dashicons {
+    margin-top: 1rem;
+}
+
+body.toplevel_page_optipub #save-widgets div.settings textarea {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+body.toplevel_page_optipub #save-widgets div.settings input::placeholder,
+body.toplevel_page_optipub #save-widgets div.settings textarea::placeholder {
+    color: lightgrey;
+}
+
+body.toplevel_page_optipub #copy-form {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-gap: 5px;
+}
+
+body.toplevel_page_optipub #copy-form input[type="text"] {
+    min-width: 200px; /* Adjust as needed */
+}
+
+body.toplevel_page_optipub div.settings label,
+body.toplevel_page_optipub div.settings .dashicons,
+body.toplevel_page_optipub div.settings span,
+body.toplevel_page_optipub #copy-form label
+{
+    text-align: right;
+    align-self: center;
+}
+
+body.toplevel_page_optipub div.settings label,
+body.toplevel_page_optipub div.settings .dashicons,
+body.toplevel_page_optipub #copy-form label
+{
+    color: grey;
+}
+
+body.toplevel_page_optipub .dashicons:hover::before {
+    cursor: pointer;
+}
+
+body.toplevel_page_optipub .dashicons-info:hover::after {
+    content: attr(data-tooltip);
+    /* Tooltip styling (position, background, etc.) */
+    position: absolute;
+    text-align: left;
+    white-space: pre-wrap;
+    height: auto;
+    background-color: grey;
+    color: white;
+    padding: 10px;
+    height: auto;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: monospace;
+    line-height: 25px;
+    border-radius: 5px;
+    border: double 3px #ccc;
+    z-index: 100;
+}
+
+body.toplevel_page_optipub .optipub-success {
+    background: #bee5be;
+}
+
+body.toplevel_page_optipub .optipub-failure {
+    background: #ffb8b8;
+}
+
+/*
+body.toplevel_page_optipub .optipub-icon-colors {
+    color: rgb(128, 199, 133) !important;
+}
+
+body.toplevel_page_optipub .dashicons-before.optipub-icon-colors:before {
+    color: rgb(128, 199, 133) !important;
+}
+*/
+body.toplevel_page_optipub select[multiple] {
+    overflow-y: auto;
+}
+
+body.toplevel_page_optipub .publication-manager {
+    margin: 10px 0 0;
+    padding-bottom: 10px;
+}
+
+body.toplevel_page_optipub .options-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+body.toplevel_page_optipub .selected-publications {
+    margin-bottom: 10px;
+}
+
+body.toplevel_page_optipub .selected-publication {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f1f1f1;
+    padding: 8px 12px;
+    margin: 5px 0;
+    border-radius: 4px;
+}
+
+body.toplevel_page_optipub .remove-publication {
+    background: none;
+    border: none;
+    color: #cc0000;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 0 5px;
+}
+
+body.toplevel_page_optipub .remove-publication:hover {
+    color: #990000;
+}
+
+body.toplevel_page_optipub #publication_selector {
+    width: 100%;
+} 
+
+body.toplevel_page_optipub .publication-select-controls {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+body.toplevel_page_optipub .clear-data-checkboxes {
+    margin-top: 1rem;
+}
+
+/* TAXONOMY - OPTIPUB PUBLICATIONS */
+
+body.taxonomy-optipub_publication #wpbody-content {
+    max-width: 1000px;
+}
+
+body.taxonomy-optipub_publication .wpseo-taxonomy-metabox-postbox,
+body.taxonomy-optipub_publication .term-description-wrap { 
+    display: none; 
+}
+
+body.taxonomy-optipub_publication #col-left {
+    display: none;
+}
+
+body.taxonomy-optipub_publication #col-right {
+    width: 100%;
+}
+
+body.taxonomy-optipub_publication .logo-asset-url {
+    max-width: 135px;
+    height: auto;
+    max-height: 50px;
+    margin-top: 0.5rem;
+    border: double 4px #ccc;
+    border-radius: 5px;
+}
+
+body.toplevel_page_optipub input::placeholder {
+    color: #aaa;
+}
+
+body.toplevel_page_optipub input::-webkit-input-placeholder {
+    color: #aaa;
+}
+
+body.toplevel_page_optipub input::-moz-placeholder {
+    color: #aaa;
+    opacity: 1;
+}
+
+body.toplevel_page_optipub input:-ms-input-placeholder {
+    color: #aaa;
+}
+
+body.toplevel_page_optipub input:-moz-placeholder {
+    color: #aaa;
+}
+
+body.taxonomy-optipub_publication .accordion-arrow {
+    float: right;
+}
+
+body.taxonomy-optipub_publication #publication-page-settings-table .enable-checkbox { 
+    margin: 7px;
+}
+
+body.taxonomy-optipub_publication #publication-page-settings-table .page-slug-input {
+    width: 160px;
+}
+
+body.taxonomy-optipub_publication #publication-page-settings-table .page-title-input {
+    width: 160px;
+}
+
+body.taxonomy-optipub_publication #publication-page-settings-table .template-select {
+    width: 200px;
+}
+
+body.taxonomy-optipub_publication #publication-page-settings-table .publication-page-settings-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+body.taxonomy-optipub_publication #publication-page-settings-table .top-row .publication-page-settings-row {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+body.taxonomy-optipub_publication #publication-page-settings-table .bottom-row .publication-page-settings-row {
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+body.taxonomy-optipub_publication #publication-page-settings-table tr.bottom-row label {
+    width: 100%;
+}
+
+body.taxonomy-optipub_publication #publication-page-settings-table tr.bottom-row {
+    border-bottom: solid 1px #ccc;
+}
+
+@media screen and (min-width: 900px) {
+    /* Control column widths in publications table */
+    body.taxonomy-optipub_publication .fixed .column-name {
+        width: 25% !important;
+    }
+}
+
+body.taxonomy-optipub_publication .fixed .column-slug {
+    width: unset !important;
+}
+
+
+/* REMOVE THIS
+.clear-data-container {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.clear-data-container .checkbox-wrapper {
+    margin-left: 10px;
+}
+*/

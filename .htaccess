@@ -1,0 +1,7 @@
+# Block access to log files in wp-content directory
+<FilesMatch "^wp-content/.*\.log$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# BEGIN WordPress 

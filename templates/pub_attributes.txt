@@ -1,0 +1,10 @@
+pub->ID
+pub->name
+pub->code
+pub->logo_asset_id
+pub->domain_id
+pub->paid
+pub->fav_icon_asset_id
+pub->info->object
+pub->mappings[array]
+pub->publication_content->object

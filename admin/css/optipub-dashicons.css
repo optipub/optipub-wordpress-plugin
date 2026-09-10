@@ -1,0 +1,9 @@
+/** Admin Dashboard styles **/
+
+.optipub-icon-colors {
+    color: rgb(128, 199, 133) !important;
+}
+
+.dashicons-before.optipub-icon-colors:before {
+    color: rgb(128, 199, 133) !important;
+}

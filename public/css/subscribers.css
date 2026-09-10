@@ -1,0 +1,24 @@
+.publication-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.publication-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.publication-card a {
+  color: inherit;
+}
+
+.publication-card a:hover {
+  color: inherit;
+}
+
+.badge {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.badge:hover {
+  opacity: 0.9;
+}

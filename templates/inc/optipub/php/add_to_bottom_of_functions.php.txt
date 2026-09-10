@@ -1,0 +1,18 @@
+/**
+* Load additional OptiPub theme functions files.
+*/
+
+// Include OptiPub Helper Functions.
+#include get_template_directory() . '/inc/optipub/php/custom-theme-functions.php';
+
+// Include OptiPub Helper Functions.
+#include get_template_directory() . '/inc/optipub/php/optipub-helper-functions.php';
+
+// Include OptiPub Helper Functions.
+#include get_template_directory() . '/inc/optipub/php/optipub-link-modification-functions.php';
+
+// Include Yoast Functions for OptiPub Resources.
+#include get_template_directory() . '/inc/optipub/php/yoast-functions.php';
+
+// Include All in One SEO Functions for OptiPub Resources.
+#include get_template_directory() . '/inc/optipub/php/aioseo-functions.php';
