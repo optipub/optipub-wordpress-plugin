@@ -1,0 +1,54 @@
+name: Update WordPress.org readme and assets
+
+# Pushes readme.txt and .wordpress-org asset changes on main to WordPress.org between releases
+# (for example "Tested up to" or new screenshots). Code changes are never pushed by this workflow;
+# they ship with the next release. Skipped while the version on main has not been released yet,
+# because the readme then describes the upcoming release.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - readme.txt
+      - .wordpress-org/**
+  workflow_dispatch:
+
+concurrency:
+  group: wordpress-org
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  update:
+    name: Update readme and assets
+    runs-on: ubuntu-latest
+    environment: wordpress-org
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check that the current version is released
+        id: released
+        run: |
+          stable_tag=$(sed -n 's/^Stable tag:[[:space:]]*//p' readme.txt | head -n 1 | tr -d '[:space:]')
+
+          command -v svn > /dev/null || { sudo apt-get update -y && sudo apt-get install -y subversion; }
+
+          if svn ls "https://plugins.svn.wordpress.org/optipub/tags/${stable_tag}/" > /dev/null 2>&1; then
+            echo "released=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Version $stable_tag is not on WordPress.org yet; the readme and assets will ship with the release."
+            echo "released=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Update readme and assets on WordPress.org
+        if: steps.released.outputs.released == 'true'
+        uses: 10up/action-wordpress-plugin-asset-update@2480306f6f693672726d08b5917ea114cb2825f7 # 2.2.0
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: optipub
+          IGNORE_OTHER_FILES: true

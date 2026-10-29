@@ -1,0 +1,99 @@
+name: Deploy to WordPress.org
+
+# Publishing a GitHub release (tag vX.Y.Z or X.Y.Z) deploys that version to the WordPress.org
+# SVN repository: trunk, tags/X.Y.Z and the .wordpress-org assets, in a single SVN commit.
+# The plugin ZIP is attached to the GitHub release.
+
+on:
+  release:
+    types: [released]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Prepare the SVN commit without committing it'
+        type: boolean
+        default: true
+
+concurrency:
+  group: wordpress-org
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Lint
+    uses: ./.github/workflows/lint.yml
+
+  deploy:
+    name: Deploy to WordPress.org
+    needs: lint
+    runs-on: ubuntu-latest
+    environment: wordpress-org
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check the version
+        id: version
+        env:
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+        run: |
+          plugin_version=$(sed -n 's/^[[:space:]*]*Version:[[:space:]]*//p' optipub.php | head -n 1 | tr -d '[:space:]')
+          stable_tag=$(sed -n 's/^Stable tag:[[:space:]]*//p' readme.txt | head -n 1 | tr -d '[:space:]')
+
+          if [ -z "$plugin_version" ] || [ "$plugin_version" != "$stable_tag" ]; then
+            echo "::error::Version in optipub.php ($plugin_version) and Stable tag in readme.txt ($stable_tag) must match"
+            exit 1
+          fi
+
+          if [ "$DRY_RUN" != "true" ]; then
+            tag="${GITHUB_REF#refs/tags/}"
+
+            if [ "$GITHUB_REF_TYPE" != "tag" ] || [ "${tag#v}" != "$plugin_version" ]; then
+              echo "::error::Release tag (${GITHUB_REF_NAME}) must be v$plugin_version or $plugin_version, matching the plugin version"
+              exit 1
+            fi
+
+            if ! git merge-base --is-ancestor HEAD origin/main; then
+              echo "::error::Releases must be created from a commit on main"
+              exit 1
+            fi
+          fi
+
+          echo "version=$plugin_version" >> "$GITHUB_OUTPUT"
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer:v2
+          coverage: none
+
+      - name: Install production dependencies
+        run: composer install --no-dev --no-interaction --no-progress --prefer-dist --optimize-autoloader
+
+      - name: Deploy to WordPress.org
+        id: deploy
+        uses: 10up/action-wordpress-plugin-deploy@54bd289b8525fd23a5c365ec369185f2966529c2 # 2.3.0
+        with:
+          dry-run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+          generate-zip: true
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: optipub
+          VERSION: ${{ steps.version.outputs.version }}
+
+      - name: Attach the plugin ZIP to the release
+        if: github.event_name == 'release'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ZIP_PATH: ${{ steps.deploy.outputs.zip-path }}
+        run: gh release upload "$GITHUB_REF_NAME" "$ZIP_PATH" --clobber
