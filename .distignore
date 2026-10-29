@@ -3,9 +3,14 @@
 .editorconfig
 .distignore
 .git
+/.github
+/.gitattributes
 .gitignore
 .gitlab-ci.yml
 .travis.yml
+/.wordpress-org
+/CONTRIBUTING.md
+/LICENSE
 .DS_Store
 Thumbs.db
 behat.yml

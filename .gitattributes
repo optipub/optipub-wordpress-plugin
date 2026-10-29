@@ -2,6 +2,7 @@
 # Mirrors .distignore so GitHub-generated archives stay lean.
 
 /.github            export-ignore
+/.wordpress-org     export-ignore
 /.gitattributes     export-ignore
 /.gitignore         export-ignore
 /.distignore        export-ignore
