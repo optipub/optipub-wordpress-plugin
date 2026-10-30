@@ -892,6 +892,10 @@ class CustomPostTypeLoader extends BaseController
 
         if (isset($resource->tags) && !empty($resource->tags)) {
             foreach ($resource->tags as $tag) {
+                if ($this->isTagHiddenFromWebsite($tag)) {
+                    continue;
+                }
+
                 // Use original tag name to avoid mutation issues
                 $tag_name = $tag->name;
 
@@ -943,6 +947,17 @@ class CustomPostTypeLoader extends BaseController
         return $categoryIDs;
     }
 
+    /**
+     * Whether OptiPub marked the tag as hidden from the website
+     *
+     * A missing or empty flag keeps the tag, so API responses without the flag sync as before.
+     */
+    private function isTagHiddenFromWebsite($tag): bool
+    {
+        return isset($tag->show_on_website)
+            && in_array($tag->show_on_website, [false, 0, '0', 'false'], true);
+    }
+
     private function populateTags($resource): array
     {
         $tagIDs = [];
@@ -954,6 +969,10 @@ class CustomPostTypeLoader extends BaseController
 
         if (isset($resource->tags) && !empty($resource->tags)) {
             foreach ($resource->tags as $tag) {
+                if ($this->isTagHiddenFromWebsite($tag)) {
+                    continue;
+                }
+
                 $tag_name = $tag->name;
 
                 $tagID = term_exists($tag_name, 'post_tag');
