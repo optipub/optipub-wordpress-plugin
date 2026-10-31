@@ -66,6 +66,54 @@ Actions; PRs must pass it before merge.
 5. Push your branch and open a pull request against `main`, describing the
    change and how you verified it.
 
+## Releasing
+
+Releases to WordPress.org are automated with GitHub Actions. WordPress.org
+only accepts plugins through its SVN repository, so SVN is used for releases
+only, never for development.
+
+### Releasing a new version
+
+1. Open a pull request that bumps the version in the `optipub.php` header
+   (`Version:`) and in `readme.txt` (`Stable tag:`); the two must match.
+   Add a changelog entry to `readme.txt`.
+2. Merge it into `main`.
+3. [Publish a GitHub release](https://github.com/optipub/optipub-wordpress-plugin/releases/new)
+   from `main` with the tag `v<version>`, for example `v1.0.26`.
+
+Publishing the release runs the
+[Deploy to WordPress.org](.github/workflows/deploy.yml) workflow:
+
+- It runs the Lint checks.
+- It checks that the tag matches the plugin version and points to a commit on `main`.
+- It installs the production dependencies (`composer install --no-dev`).
+- It deploys `trunk`, `tags/<version>` and the `.wordpress-org` assets in one
+  SVN commit. Files listed in `.distignore` are left out.
+- It attaches `optipub.zip` to the release.
+
+Pre-releases are not deployed. The workflow can also be run by hand from the
+Actions tab; it defaults to a dry run, which prepares the SVN commit without
+committing it.
+
+### Updating the readme or assets between releases
+
+Plugin page assets (icon, banners, screenshots) live in `.wordpress-org/`,
+using the [WordPress.org file names](https://developer.wordpress.org/plugins/wordpress-org/plugin-assets/).
+
+Changes to `readme.txt` or `.wordpress-org/` that are merged into `main` are
+pushed to WordPress.org right away by the
+[Update WordPress.org readme and assets](.github/workflows/wordpress-org-assets.yml)
+workflow, for example a new "Tested up to" value. This workflow never pushes
+code. It does nothing while the version on `main` has not been released yet,
+so readme changes for an upcoming version go out with that release.
+
+### Secrets
+
+Both workflows use the `SVN_USERNAME` and `SVN_PASSWORD` secrets of the
+`wordpress-org` environment (repository secrets also work). They are the
+WordPress.org account that owns the plugin and its SVN password, which is set
+under Account & Security on WordPress.org.
+
 ## Reporting issues
 
 Please open a GitHub issue with:
