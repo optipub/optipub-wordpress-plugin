@@ -79,17 +79,17 @@ jobs:
       - name: Install production dependencies
         run: composer install --no-dev --no-interaction --no-progress --prefer-dist --optimize-autoloader
 
+      # Patched copy of 10up/action-wordpress-plugin-deploy 2.3.0; see the header of the script.
       - name: Deploy to WordPress.org
         id: deploy
-        uses: 10up/action-wordpress-plugin-deploy@54bd289b8525fd23a5c365ec369185f2966529c2 # 2.3.0
-        with:
-          dry-run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
-          generate-zip: true
         env:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
           SLUG: optipub
           VERSION: ${{ steps.version.outputs.version }}
+          INPUT_DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+          INPUT_GENERATE_ZIP: true
+        run: bash .github/scripts/deploy-wordpress-org.sh
 
       - name: Attach the plugin ZIP to the release
         if: github.event_name == 'release'
