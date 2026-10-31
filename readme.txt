@@ -4,7 +4,7 @@ Contributors: optipub
 Tags: optipub, content-sync, api-integration, custom-post-types, widgets  
 Requires at least: 5.0  
 Tested up to: 6.9  
-Stable tag: 1.0.25
+Stable tag: 1.0.26
 Requires PHP: 7.4  
 License: GPLv2 or later  
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -116,6 +116,14 @@ This plugin includes one minified JavaScript library for video functionality:
 The source code for this minified library is publicly available at the GitHub repository link above. This plugin does not include any custom build process - the minified file is used directly from the Video.js project.
 
 == Changelog ==
+
+### 1.0.26
+#### Improvements
+- Tags that OptiPub marks as hidden from the website are no longer synced as categories or tags.
+- The plugin package now ships only the libraries needed at runtime, so it is much smaller.
+- Updated release versioning to 1.0.26.
+
+---
 
 ### 1.0.25
 #### Bug fixes

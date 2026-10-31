@@ -11,7 +11,7 @@
  * @wordpress-plugin
  * Plugin Name:       OptiPub
  * Description:       A plugin that syncs content from OptiPub API and builds a client website based on the selected publication.
- * Version:           1.0.25
+ * Version:           1.0.26
  * Requires PHP:      7.4
  * Author:            OptiPub
  * Author URI:        https://www.optipub.com/
