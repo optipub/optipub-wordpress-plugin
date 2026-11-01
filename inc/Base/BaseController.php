@@ -114,7 +114,10 @@ class BaseController
         if (!empty($last_run_timestamp)) {
             // Only prepend "Last Sync" if it's not already there
             if (strpos($summary_log, 'Last Sync') === false) {
-                return "[{$last_run_timestamp}] Last Sync\n\n" . $log;
+                // Stored in UTC; shown in the site's time zone like the log entries
+                $last_run_local = get_date_from_gmt($last_run_timestamp);
+
+                return "[{$last_run_local}] Last Sync\n\n" . $log;
             }
         }
 
