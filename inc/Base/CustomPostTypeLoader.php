@@ -610,7 +610,7 @@ class CustomPostTypeLoader extends BaseController
         try {
             if (isset($optiPubMetadata[$post_types]['id']) && (int) $optiPubMetadata[$post_types]['id'] >= 0) {
                 $ids = $this->fetchAllResourceIdsForPostType($publication_id, $post_types);
-                $this->logProgress('Fetched ' . count($ids) . " IDs for {$post_types} - Pub ID - {$publication_id}");
+                $this->logFetchedIds('Fetched ' . count($ids) . " IDs for {$post_types} - Pub ID - {$publication_id}");
                 $resourceIdsFetched = true;
             } elseif ('editors' == $post_types) {
                 $AlldataResponse = $this->optiPubApi->getAuthors($publication_id, 1, '', '', true, ['id', 'publication_id']);
@@ -662,7 +662,7 @@ class CustomPostTypeLoader extends BaseController
                 }
             }
 
-            $this->logProgress("Fetched {$totalCount} IDs for {$post_types} - Pub ID - {$publication_id}");
+            $this->logFetchedIds("Fetched {$totalCount} IDs for {$post_types} - Pub ID - {$publication_id}");
 
             $this->runCleanupExistingDatas($post_types, $publication_id, $ids, $remove_all);
         }

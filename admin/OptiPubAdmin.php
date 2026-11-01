@@ -184,7 +184,7 @@ if ($current_theme_directory !== $active_theme_directory && get_option(Constants
     <div class="ajax-response">
         <pre class="pre-response">
         <?php
-        if (!empty(get_option(Constants::OPTIPUB_SUMMARY_LOG))) {
+        if (!empty(get_option(Constants::OPTIPUB_SUMMARY_LOG)) || !empty(get_option(Constants::OPTIPUB_SYNC_FETCH_LOG))) {
             $summaryLog = BaseController::getSummaryLog();
 
             if ($summaryLog) {

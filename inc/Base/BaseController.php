@@ -42,18 +42,26 @@ class BaseController
 
     public function logProgress($message)
     {
-        // Ensure message is on a single line and trim it
-        $message = trim(preg_replace('/[\s\r\n]+/', ' ', $message));
+        $this->addLogEntry($this->padProgressMessage($message), true);
+    }
 
-        $maxChars = 80;
-        $length = strlen($message);
+    /**
+     * Log the IDs fetched for a post type when the sync checks for removed content
+     *
+     * Every sync fetches these, so they would fill the summary log. They have their own log, which
+     * keeps only the current sync and is shown above the summary log.
+     */
+    public function logFetchedIds($message): void
+    {
+        $line = '[' . current_time('Y-m-d H:i:s') . '] ' . $this->padProgressMessage($message);
+        $existing = trim((string) get_option(Constants::OPTIPUB_SYNC_FETCH_LOG, ''));
 
-        while ($length <= $maxChars) {
-            $message .= '.';
-            ++$length;
-        }
+        update_option(Constants::OPTIPUB_SYNC_FETCH_LOG, trim($line . "\n" . $existing), false);
+    }
 
-        $this->addLogEntry($message, true);
+    public static function clearFetchedIdsLog(): void
+    {
+        update_option(Constants::OPTIPUB_SYNC_FETCH_LOG, '', false);
     }
 
     public function logMessage($message)
@@ -95,23 +103,31 @@ class BaseController
         // Trim all logs
         $summary_log = trim($summary_log);
 
+        // The IDs fetched by the current sync go above the rest of the log
+        $fetch_log = trim((string) get_option(Constants::OPTIPUB_SYNC_FETCH_LOG, ''));
+        $log = '' === $fetch_log ? $summary_log : trim($fetch_log . "\n\n" . $summary_log);
+
         if (get_option(Constants::OPTIPUB_SYNC_LOCK) !== '0' && get_option(Constants::OPTIPUB_SYNC_LOCK) !== 0) {
-            return "WP Cron Job is processing: \n\n" . $summary_log;
+            return "WP Cron Job is processing: \n\n" . $log;
         }
 
         if (!empty($last_run_timestamp)) {
             // Only prepend "Last Sync" if it's not already there
             if (strpos($summary_log, 'Last Sync') === false) {
-                return "[{$last_run_timestamp}] Last Sync\n\n" . $summary_log;
+                // Stored in UTC; shown in the site's time zone like the log entries
+                $last_run_local = get_date_from_gmt($last_run_timestamp);
+
+                return "[{$last_run_local}] Last Sync\n\n" . $log;
             }
         }
 
-        return $summary_log;
+        return $log;
     }
 
     public function clearSummaryLog()
     {
         update_option(Constants::OPTIPUB_SUMMARY_LOG, '');
+        self::clearFetchedIdsLog();
     }
 
     public static function logCopyFile($message)
@@ -376,6 +392,24 @@ class BaseController
             'decrypted_token_exists' => !empty($decrypted_token),
             'decrypted_token_length' => strlen($decrypted_token),
         ];
+    }
+
+    /**
+     * Put a progress message on a single line and pad it with dots to 80 characters
+     */
+    private function padProgressMessage($message): string
+    {
+        $message = trim(preg_replace('/[\s\r\n]+/', ' ', $message));
+
+        $maxChars = 80;
+        $length = strlen($message);
+
+        while ($length <= $maxChars) {
+            $message .= '.';
+            ++$length;
+        }
+
+        return $message;
     }
 
     /**

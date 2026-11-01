@@ -76,6 +76,7 @@ class Constants
 
     // Log options
     public const OPTIPUB_SUMMARY_LOG = 'optipub_summary_log';
+    public const OPTIPUB_SYNC_FETCH_LOG = 'optipub_sync_fetch_log';
     public const OPTIPUB_COPY_FILE_LOG = 'optipub_copy_file_log';
 
     // Custom template options
