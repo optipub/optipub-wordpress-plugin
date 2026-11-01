@@ -259,6 +259,8 @@ class CronHandler extends BaseController
 
         // Memory throttling function
         $checkMemory = function () {
+            self::releaseObjectCacheMemory();
+
             $memory_usage = memory_get_usage(true);
             $memory_limit = ini_get('memory_limit');
             $memory_limit_bytes = $this->convertToBytes($memory_limit);

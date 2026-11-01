@@ -128,6 +128,38 @@ class BaseController
         $instance->addLogEntry($message, true, false);
     }
 
+    /**
+     * Empty the in-memory copy of the object cache
+     *
+     * A persistent object cache keeps a copy of every value read or written during the request
+     * (some drop-ins also log every operation). A full sync touches every post, so the process
+     * runs out of memory on large sites. The values stay in the persistent cache. Same approach
+     * as WP-CLI's wp_clear_object_cache().
+     */
+    public static function releaseObjectCacheMemory(): void
+    {
+        global $wpdb, $wp_object_cache;
+
+        $wpdb->queries = [];
+
+        if (function_exists('wp_cache_flush_runtime') && function_exists('wp_cache_supports') && wp_cache_supports('flush_runtime')) {
+            wp_cache_flush_runtime();
+
+            return;
+        }
+
+        if (!is_object($wp_object_cache)) {
+            return;
+        }
+
+        // Object caches without flush_runtime support (WordPress before 6.1, older drop-ins)
+        foreach (['group_ops', 'stats', 'memcache_debug', 'cache'] as $property) {
+            if (isset($wp_object_cache->$property) && is_array($wp_object_cache->$property)) {
+                $wp_object_cache->$property = [];
+            }
+        }
+    }
+
     public function write_log($log)
     {
         if (is_array($log) || is_object($log)) {

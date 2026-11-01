@@ -460,6 +460,7 @@ class CustomPostTypeLoader extends BaseController
                     }
 
                     $this->logDoneStatus();
+                    self::releaseObjectCacheMemory();
                 }
             }
         }
@@ -525,6 +526,10 @@ class CustomPostTypeLoader extends BaseController
                 $this->logProgress($message);
             }
             $this->logDoneStatus();
+
+            if (0 === ($i + 1) % 100) {
+                self::releaseObjectCacheMemory();
+            }
         }
     }
 
