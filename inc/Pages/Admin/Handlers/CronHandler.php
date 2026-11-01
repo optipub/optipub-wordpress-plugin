@@ -88,6 +88,9 @@ class CronHandler extends BaseController
             return;
         }
 
+        // The fetched IDs log only keeps the current sync
+        self::clearFetchedIdsLog();
+
         try {
             $this->performSync();
         } catch (\Exception $e) {
@@ -304,11 +307,6 @@ class CronHandler extends BaseController
             $cptLoader = new CustomPostTypeLoader();
             $pageFactory = new PageFactory();
 
-            // Get old summary log and trim it
-            $oldSummaryLog = get_option(Constants::OPTIPUB_SUMMARY_LOG);
-            $oldSummaryLog = trim($oldSummaryLog);
-            //update_option(Constants::OPTIPUB_SUMMARY_LOG, '');
-
             $currentDateTime = gmdate('Y-m-d H:i:s');
 
             // Check memory before each major operation
@@ -349,10 +347,10 @@ class CronHandler extends BaseController
             update_option(Constants::OPTIPUB_SYNC_HAS_RUN, 1);
             $this->logLastSuccessfulSyncRunTimestamp($currentDateTime);
 
-            $newSummaryLog = get_option(Constants::OPTIPUB_SUMMARY_LOG);
-            $newSummaryLog = trim($newSummaryLog);
-
-            $fullSummaryLog = $newSummaryLog . "\n" . $oldSummaryLog;
+            // Each entry of this sync was added on top of the log, so the log is already the current
+            // sync followed by the rest. Lines from before the fetched IDs had their own log are removed.
+            $fullSummaryLog = get_option(Constants::OPTIPUB_SUMMARY_LOG);
+            $fullSummaryLog = preg_replace('/^\[[^\]\n]*\] Fetched \d+ IDs for [^\n]*\n?/m', '', (string) $fullSummaryLog);
             $fullSummaryLog = $this->log_handler->trimSummaryLog($fullSummaryLog);
             update_option(Constants::OPTIPUB_SUMMARY_LOG, $fullSummaryLog);
         } catch (\Exception $e) {

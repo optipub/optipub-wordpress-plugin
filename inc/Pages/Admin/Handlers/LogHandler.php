@@ -27,6 +27,7 @@ class LogHandler extends BaseController
     public function clearLogs(): void
     {
         update_option(Constants::OPTIPUB_SUMMARY_LOG, '');
+        self::clearFetchedIdsLog();
     }
 
     public function logOperation(string $operation, string $status): void
