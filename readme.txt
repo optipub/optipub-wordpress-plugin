@@ -4,7 +4,7 @@ Contributors: optipub
 Tags: optipub, content-sync, api-integration, custom-post-types, widgets  
 Requires at least: 5.0  
 Tested up to: 6.9  
-Stable tag: 1.0.26
+Stable tag: 1.0.27
 Requires PHP: 7.4  
 License: GPLv2 or later  
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -116,6 +116,16 @@ This plugin includes one minified JavaScript library for video functionality:
 The source code for this minified library is publicly available at the GitHub repository link above. This plugin does not include any custom build process - the minified file is used directly from the Video.js project.
 
 == Changelog ==
+
+### 1.0.27
+#### Bug fixes
+- Full syncs (the first sync and Re-Sync) no longer run out of memory on large sites that use a persistent object cache.
+- The "Fetched IDs" lines of each sync have their own log, which keeps only the current sync and is shown at the top of the log, so they no longer fill the summary log.
+- Each sync adds only its own entries to the log; the log no longer keeps growing.
+- The "Last Sync" time in the log is shown in the site's time zone.
+- Updated release versioning to 1.0.27.
+
+---
 
 ### 1.0.26
 #### Improvements
