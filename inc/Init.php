@@ -26,6 +26,7 @@ final class Init
             Pages\Admin\AdminPage::class => OPTIPUB_PLUGIN_DIR,
             Api\OptiPubWebhook::class,
             Api\OptiPubAuthentication::class,
+            Api\SyncMonitor::class,
             Subscribers\OptiPubWP_SubscribersController::class,
             Subscribers\OptiPubWP_AccessControl::class,
         ];
