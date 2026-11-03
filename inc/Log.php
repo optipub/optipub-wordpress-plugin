@@ -1,9 +1,9 @@
 <?php
 
-namespace OptiPubWP;
+namespace OptiPub;
 
 /**
- * Troubleshooting Log class for OptiPubWP
+ * Troubleshooting Log class for OptiPub
  *
  * This class provides a base class for logging messages to a file with the class name as the filename.
  * It includes methods for logging messages with timestamps and optional file paths.

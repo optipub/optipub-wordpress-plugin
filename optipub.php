@@ -41,6 +41,24 @@ if (file_exists(OPTIPUB_PLUGIN_DIR . 'vendor/autoload.php')) {
     require_once OPTIPUB_PLUGIN_DIR . 'vendor/autoload.php';
 }
 
+/**
+ * Keep the former OptiPubWP\ class names working, such as \OptiPubWP\PubAccess\UserAccess
+ *
+ * Those classes now use the OptiPub\ namespace. Themes that still call the old names get an alias
+ * of the new class. Remove once the themes use OptiPub\.
+ */
+spl_autoload_register(static function (string $class): void {
+    if (0 !== strpos($class, 'OptiPubWP\\')) {
+        return;
+    }
+
+    $new_class = 'OptiPub\\' . substr($class, strlen('OptiPubWP\\'));
+
+    if (class_exists($new_class)) {
+        class_alias($new_class, $class);
+    }
+});
+
 // Near the top where you include other files
 require_once OPTIPUB_PLUGIN_DIR . 'inc/Functions/UserRoles.php';
 
@@ -59,9 +77,9 @@ if (class_exists('OptiPub\\Init')) {
 }
 
 // Initialize global UserAccess instance
-if (class_exists('OptiPubWP\\PubAccess\\UserAccess')) {
+if (class_exists('OptiPub\\PubAccess\\UserAccess')) {
     global $optipub_user_access;
-    $optipub_user_access = new OptiPubWP\PubAccess\UserAccess();
+    $optipub_user_access = new OptiPub\PubAccess\UserAccess();
 }
 
 // Store plugin path globally

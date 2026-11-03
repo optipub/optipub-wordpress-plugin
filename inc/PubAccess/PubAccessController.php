@@ -1,6 +1,6 @@
 <?php
 
-namespace OptiPubWP\PubAccess;
+namespace OptiPub\PubAccess;
 
 class PubAccessController
 {

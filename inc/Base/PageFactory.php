@@ -192,7 +192,7 @@ class PageFactory extends BaseController
      */
     public function buildPublicationSlugPage(int $publication_id): int
     {
-        $publications = new \OptiPubWP\Publications\Publications();
+        $publications = new \OptiPub\Publications\Publications();
         $publication_data = $publications->optipub_get_publication_terms_by_pub_id($publication_id);
 
         if (!$publication_data) {

@@ -12,7 +12,7 @@ if (! defined('ABSPATH')) {
 }
 
 // Add Plugin API Class
-$optipub_db_query = new Inc\Api\WpDatabaseQuery();
+$optipub_db_query = new OptiPub\Api\WpDatabaseQuery();
 
 // Verify nonce for form data processing
 $nonce_verified = false;

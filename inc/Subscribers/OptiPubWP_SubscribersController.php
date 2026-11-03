@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
 use OptiPub\Api\OptiPubApi;
 use OptiPub\Base\Constants;
 use OptiPub\Base\EncryptDecryptUtil;
-use OptiPubWP\Publications\Publications;
+use OptiPub\Publications\Publications;
 use WP_Error;
 use WP_User;
 

@@ -12,7 +12,6 @@
   },
   "autoload": {
     "psr-4": {
-      "OptiPubWP\\": "./inc",
       "OptiPub\\": "./inc"
     }
   },

@@ -1,10 +1,10 @@
 <?php
 
-namespace OptiPubWP\PubAccess;
+namespace OptiPub\PubAccess;
 
 use OptiPub\Base\Constants;
+use OptiPub\Log;
 use OptiPub\Subscribers\OptiPubWP_EncryptControl;
-use OptiPubWP\Log;
 use WP_Query;
 use WP_User;
 

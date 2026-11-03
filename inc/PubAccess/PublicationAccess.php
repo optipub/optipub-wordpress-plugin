@@ -1,10 +1,10 @@
 <?php
 
-namespace OptiPubWP\PubAccess;
+namespace OptiPub\PubAccess;
 
 use OptiPub\Api\WpDatabaseQuery;
 use OptiPub\Base\Constants;
-use OptiPubWP\Log;
+use OptiPub\Log;
 use WP_Error;
 
 class PublicationAccess
