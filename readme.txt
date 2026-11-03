@@ -4,7 +4,7 @@ Contributors: optipub
 Tags: optipub, content-sync, api-integration, custom-post-types, widgets  
 Requires at least: 5.0  
 Tested up to: 6.9  
-Stable tag: 1.0.27
+Stable tag: 1.0.28
 Requires PHP: 7.4  
 License: GPLv2 or later  
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -116,6 +116,17 @@ This plugin includes one minified JavaScript library for video functionality:
 The source code for this minified library is publicly available at the GitHub repository link above. This plugin does not include any custom build process - the minified file is used directly from the Video.js project.
 
 == Changelog ==
+
+### 1.0.28
+#### New
+- New REST endpoint `GET /wp-json/optipub/v1/last-run` for uptime monitors: it answers 200 while the sync runs normally, and 503 when the last successful sync started more than 10 minutes ago (the sync lock timeout).
+
+#### Improvements
+- Every plugin class now uses the `OptiPub\` namespace. Themes that still call the former `OptiPubWP\` class names (for example `\OptiPubWP\PubAccess\UserAccess`) keep working.
+- The archive template no longer refers to a class of the legacy plugin.
+- Updated release versioning to 1.0.28.
+
+---
 
 ### 1.0.27
 #### Bug fixes
