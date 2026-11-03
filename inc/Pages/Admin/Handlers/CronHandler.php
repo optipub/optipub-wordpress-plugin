@@ -13,7 +13,7 @@ use OptiPub\Base\CustomPostTypeLoader;
 use OptiPub\Base\Helper;
 use OptiPub\Base\PageFactory;
 use OptiPub\Base\RedirectsLoader;
-use OptiPubWP\Log;
+use OptiPub\Log;
 
 class CronHandler extends BaseController
 {

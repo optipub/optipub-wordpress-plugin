@@ -56,7 +56,7 @@ WordPress install. The plugin loads its Composer autoloader from
 | ----------------------- | --------------------------------------------------- |
 | `optipub.php`           | Plugin bootstrap and WordPress header               |
 | `uninstall.php`         | Cleanup routine run on uninstall                    |
-| `inc/`                  | PSR-4 autoloaded classes (`OptiPubWP\`, `OptiPub\`) |
+| `inc/`                  | PSR-4 autoloaded classes (`OptiPub\`)               |
 | `admin/`                | Admin screens and partials                          |
 | `public/`               | Front-end assets (JS, CSS, images)                  |
 | `templates/`            | Theme templates and sync fixtures                   |

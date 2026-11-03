@@ -5,8 +5,8 @@ namespace OptiPub\Subscribers;
 use Exception;
 use OptiPub\Api\OptiPubApi;
 use OptiPub\Base\Constants;
-use OptiPubWP\Log;
-use OptiPubWP\Publications\Publications;
+use OptiPub\Log;
+use OptiPub\Publications\Publications;
 use WP_Error;
 use WP_User;
 

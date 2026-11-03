@@ -1,11 +1,11 @@
 <?php
 
-namespace OptiPubWP\Publications;
+namespace OptiPub\Publications;
 
 use OptiPub\Api\OptiPubApi;
 use OptiPub\Base\Constants;
 use OptiPub\Base\EncryptDecryptUtil;
-use OptiPubWP\Log;
+use OptiPub\Log;
 use WP_Error;
 
 class Publications
